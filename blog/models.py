@@ -9,4 +9,7 @@ class Post(models.Model):
 
     def __str__(self):
         return f'[{self.pk}] {self.title}'  # change to admin title like this.
+
+    def get_absolute_url(self):
+        return f'/blog/{self.pk}'
 # Create your models here.

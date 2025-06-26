@@ -15,7 +15,11 @@
             {% endif %}
             <div class="card-body">
                 <div class="small text-muted">January 1, 2023</div>
-                <span class="badge badge-secondary float-right">{{ p.category }}</span>
+                {% if p.category %}
+                    <span class="badge badge-secondary float-right">{{ p.category }}</span>
+                {% else %}
+                    <span class="badge badge-secondary float-right">None Category</span>
+                {% endif %}
                 <h2 class="card-title h4">{{ p.title }}</h2>
                 {% if p.hook_text %}
                     <h5 class="text-muted">{{ p.hook_text }}</h5>

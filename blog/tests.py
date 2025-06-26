@@ -48,4 +48,5 @@ class TestView(TestCase):
         self.assertIn(post_002.title, main_area.text)
         # 3.4 no "any post is not yet"
         self.assertNotIn('any post is not yet', main_area.text)
+
 # Create your tests here.

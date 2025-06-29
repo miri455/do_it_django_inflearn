@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'single_pages',
     'crispy_forms',
     'crispy_bootstrap4',
+    'markdownx',
 ]
 
 MIDDLEWARE = [

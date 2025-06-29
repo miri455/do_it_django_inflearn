@@ -90,7 +90,7 @@ class PostUpdate(LoginRequiredMixin, UpdateView):
 
             for t in tags_list:
                 t = t.strip()
-                tag, is_tag_created = Tag.objects.get_or_create(name=t)
+                tag, is_tag_created = Tag.objects.get_or_create(name=t, defaults={'slug':slugify(t,allow_unicode=True)})
                 if is_tag_created:
                     tag.slug = slugify(t, allow_unicode=True)
                     tag.save()

@@ -51,7 +51,7 @@
         {% endif %}
         <!-- Post content-->
         <section class="mb-5">
-            <p>{{ post.content }}</p>
+            <p>{{ post.get_context_markdown | safe }}</p>
         </section>
 
         {% if post.tags.exists %}

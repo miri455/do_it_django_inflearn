@@ -3,9 +3,6 @@ from bs4 import BeautifulSoup
 from .models import Post
 
 class TestView(TestCase):
-    def setUP(self):
-        self.client = Client()
-
     def test_post_list(self):
         self.assertEqual(2,2)
         # 1.1 open post list

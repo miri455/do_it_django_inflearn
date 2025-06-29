@@ -1,7 +1,11 @@
+from http.client import responses
+
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Post, Category, Tag
+from django.utils.text import slugify
 
 
 class PostList(ListView):   # class type is easier than function type
@@ -47,7 +51,6 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
                     t = t.strip()
                     tag, is_tag_created = Tag.objects.get_or_create(name=t)
                     if is_tag_created:
-                        from django.utils.text import slugify
                         tag.slug = slugify(t, allow_unicode=True)
                         tag.save()
                     self.object.tags.add(tag)
@@ -62,9 +65,37 @@ class PostUpdate(LoginRequiredMixin, UpdateView):
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated and request.user == self.get_object().author:
-            return super(PostUpdate,self).dispatch(request,*args, **kwargs)
+            return super(PostUpdate, self).dispatch(request,*args, **kwargs)
         else:
-            raise redirect('/blog/')
+            raise PermissionDenied
+
+    def get_context_data(self, **kwargs):
+        context = super(PostUpdate, self).get_context_data()
+        if self.object.tags.exists():
+            tags_str_list = list()
+            for t in self.object.tags.all():
+                tags_str_list.append(t.name)
+            context['tags_str_default'] = '; '.join(tags_str_list)
+        return context
+
+    def form_valid(self, form):
+        response = super(PostUpdate,self).form_valid(form)
+        self.object.tags.clear()
+
+        tags_str = self.request.POST.get('tags_str')
+        if tags_str:
+            tags_str = tags_str.strip()
+            tags_str = tags_str.replace(',', ';')
+            tags_list = tags_str.split(';')
+
+            for t in tags_list:
+                t = t.strip()
+                tag, is_tag_created = Tag.objects.get_or_create(name=t)
+                if is_tag_created:
+                    tag.slug = slugify(t, allow_unicode=True)
+                    tag.save()
+                self.object.tags.add(tag)
+        return response
 
 def category_page(request, slug):
     if slug == 'no_category':

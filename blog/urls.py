@@ -10,4 +10,5 @@ urlpatterns = [
     path('', views.PostList.as_view()),
     path('category/<str:slug>/', views.category_page),
     path('tag/<str:slug>/', views.tag_page),
+    path('<int:pk>/new_comment/', views.new_comment),
 ]

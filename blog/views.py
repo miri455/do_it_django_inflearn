@@ -13,6 +13,7 @@ from django.utils.text import slugify
 class PostList(ListView):   # class type is easier than function type
     model = Post
     ordering = '-pk'
+    paginate_by = 5
     # template_name = 'blog/index.html'
 
     def get_context_data(self, **kwargs):

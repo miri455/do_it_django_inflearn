@@ -1,17 +1,53 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="ko">
 <head>
+    <link href="{% static 'blog/bootstrap/css/bootstrap.min.css'%}" rel="stylesheet" type="text/css">
+    <script src="https://kit.fontawesome.com/75db8c9e15.js" crossorigin="anonymous"></script>
+    <link href="{% static 'single_pages/css/landing.css'%}" rel="stylesheet" type="text/css">
     <meta charset="UTF-8">
-    <title>Daltanayng's website</title>
+    <title>Do It Django Infrean</title>
 </head>
 <body>
-    <nav>
-        <a href="/blog/">Blog</a>
-        <a href="/about_me">About me</a>
-    </nav>
+    {% include 'blog/navbar.html' %}
 
-    <h1>Hello. My name is Miri</h1>
-    <h2>melong~</h2>
-    <p>It is being maked</p>
+    <section>
+        <div class="container">
+            <div class="row justify-content-between mt-4">
+                <div class="col-lg-6 text-light">
+                    <h1>Do It! Django + Inflearn</h1>
+                    <p> make your website using the representative web framework django of python</p>
+                </div>
+                <div class="col-lg-5">
+                    <h2 class="text-light">Blog - Recent Posts</h2>
+
+                    {% for post in recent_posts %}
+                    <div class="card mt-1">
+                        <div class="card-body">
+                            <h6><a href="{{ post.get_absolute_url }}" class="text-decoration-none text-dark">{{ post.title }}</a></h6>
+                            <span class="badge badge-pill badge-light float-right">
+                                <img class="mr-1 rounded-circle" width="20px" src="{{ post.get_avatar_url }}" alt="{{ post.author }}">
+                                {{ post.author.username }}
+                                &nbsp;&nbsp;
+                                {{ post.created_at }}
+                            </span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="fixed-bottom">
+        {% include 'blog/footer.html' %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+        crossorigin="anonymous"></script>
 </body>
 </html>

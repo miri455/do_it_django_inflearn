@@ -1,17 +1,19 @@
 asgiref==3.8.1
 beautifulsoup4==4.13.4
-certifi==2024.2.2  # 또는 certifi (버전 생략)
+certifi==2024.2.2
 cffi==1.17.1
 charset-normalizer==3.4.2
-crispy-bootstrap4==2022.1  # ← 수정!
+crispy-bootstrap4==2022.1
 cryptography==45.0.4
 Django==4.2.16
 django-allauth==65.9.0
 django-bootstrap4==22.3
 django-crispy-forms==2.4
 django-markdownx==4.0.9
+gunicorn==23.0.0
 idna==3.10
 Markdown==3.6
+packaging==25.0
 pillow==10.3.0
 psycopg2-binary==2.9.10
 pycparser==2.22

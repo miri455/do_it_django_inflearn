@@ -158,6 +158,9 @@ dmypy.json
 migrations/
 _media/
 
+.env.prod
+.env.prod.db
+
 # pytype static type analyzer
 .pytype/
 

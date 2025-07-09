@@ -5,7 +5,7 @@ services:
     build: ./nginx
     volumes:
       - static_volume:/usr/src/app/_static
-      - media_volume:/usr/src/spp/_media
+      - media_volume:/usr/src/app/_media
     ports:
       - 80:80
     depends_on:

@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 import os
 from pathlib import Path
 
-from django.conf.global_settings import LOGIN_REDIRECT_URL, ALLOWED_HOSTS
+from django.conf.global_settings import LOGIN_REDIRECT_URL, ALLOWED_HOSTS, X_FRAME_OPTIONS
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap4',
     'markdownx',
+    'django_summernote',
 ]
 
 MIDDLEWARE = [
@@ -168,3 +169,5 @@ ACCOUNT_SIGNUP_FIELDS = ['email*', 'username*', 'password1*', 'password2*']
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 LOGIN_REDIRECT_URL = '/blog/'
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'

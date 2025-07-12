@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, CreateView
 
 from .models import Board
+from .forms import BoardForm
 
 
 class BoardList(ListView):
@@ -12,9 +13,10 @@ class BoardList(ListView):
 class BoardDetail(DetailView):
     model = Board
 
+
 class BoardCreate(LoginRequiredMixin, CreateView):
     model = Board
-    fields = ['title','content']
+    form_class = BoardForm
 
     def form_valid(self, form):
         current_user=self.request.user

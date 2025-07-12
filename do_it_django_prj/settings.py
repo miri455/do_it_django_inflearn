@@ -28,7 +28,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY','django-insecure-&^@$k9+s3@-kajlqsmqw8k
 DEBUG = int(os.environ.get('DEBUG',1))
 
 if os.environ.get('DJANGO_ALLOWED_HOSTS'):
-    ALLOWED_HOSTS=os.environ.get('DJANGO_ALLOWED_HOSTS').split(' ')
+    ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', '').split(',')
 else:
     ALLOWED_HOSTS = []
 
@@ -51,6 +51,7 @@ INSTALLED_APPS = [
 
     'blog',
     'single_pages',
+    'board',
     'crispy_forms',
     'crispy_bootstrap4',
     'markdownx',
@@ -80,6 +81,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.static',
             ],
         },
     },
